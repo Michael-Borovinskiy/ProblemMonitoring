@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: eventgenerator
+
+server:
+  port: 8085
+
+topicMonitoring: monitoringserv
+topicAUTO: analyticalserv
