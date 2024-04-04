@@ -7,7 +7,6 @@
     <version>1.0</version>
 </parent>
 
-<groupId>ru.boro.busapps</groupId>
 <artifactId>modellibs</artifactId>
 <packaging>jar</packaging>
 
