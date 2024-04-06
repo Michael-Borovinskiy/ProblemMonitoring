@@ -7,9 +7,14 @@
         <version>1.0</version>
     </parent>
 
-    <artifactId>eventgenerator</artifactId>
+    <artifactId>problmonitoring</artifactId>
+    <name>problmonitoring</name>
     <packaging>jar</packaging>
-    <name>eventgenerator</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -18,7 +23,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    <build>
-        <finalName>eventgenerator</finalName>
-    </build>
+
+
 </project>

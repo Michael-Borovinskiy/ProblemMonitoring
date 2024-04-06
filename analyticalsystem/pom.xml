@@ -7,9 +7,10 @@
         <version>1.0</version>
     </parent>
 
-    <artifactId>eventgenerator</artifactId>
+    <artifactId>analyticalsystem</artifactId>
+    <name>analyticalsystem</name>
     <packaging>jar</packaging>
-    <name>eventgenerator</name>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -17,8 +18,14 @@
             <version>3.8.1</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
-    <build>
-        <finalName>eventgenerator</finalName>
-    </build>
 </project>
