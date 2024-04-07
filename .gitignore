@@ -35,3 +35,5 @@ build/
 .log
 mvnw
 mvnw.cmd
+events_to_analytics/
+chkp/

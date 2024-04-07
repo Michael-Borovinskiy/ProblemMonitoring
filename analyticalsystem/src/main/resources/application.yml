@@ -4,7 +4,7 @@ spring:
 
 
   datasource:
-    url: jdbc:h2:mem:mydb
+    url: jdbc:h2:mem:analyticalevents
     username: mike1
     password:
     driverClassName: org.h2.Driver
