@@ -1,8 +1,9 @@
 package ru.boro.bussaps.analyticalstreams
 
-import org.apache.spark.sql.streaming.OutputMode
+import org.apache.spark.sql.streaming.{OutputMode, Trigger}
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions._
+import org.apache.spark.sql.types.{StringType, StructType}
 
 object analyticalstreams {
 
@@ -15,21 +16,33 @@ object analyticalstreams {
 
     spark.conf.set("spark.sql.session.timeZone", "Europe/Moscow")
 
+    val schema = new StructType()
+      .add("typeEvent", StringType)
+      .add("kindEvent", StringType)
+      .add("idClient", StringType)
+      .add("dateCreate", StringType)
+      .add("approvedBy", StringType)
+      .add("approvedDateTime", StringType)
+
     val input_stream = spark.readStream
       .format("kafka")
       .option("kafka.bootstrap.servers", "localhost:9092,localhost:9093,localhost:9094")
       .option("subscribe", "analyticalserv")
       .load()
 
-    val df = input_stream.selectExpr("CAST(key AS STRING)", "CAST(value AS STRING)")
-      .as[(String, String)]
-      .withColumn("s_dttm", current_timestamp)
+    val df = input_stream.select(
+      $"value".cast(StringType).as("value"))
+      .map(value => value.mkString)
+      .select(from_json($"value", schema).as("data"))
+      .select($"data.*")
+
 
     df.toJSON.writeStream
-      .format("json")
+      .format("text")
       .outputMode(OutputMode.Append())
       .option("path", "events_to_analytics")
       .option("checkpointLocation", "chkp")
+      .trigger(Trigger.ProcessingTime("35 seconds"))
       .start()
       .awaitTermination()
 
