@@ -35,14 +35,21 @@ object analyticalstreams {
       .map(value => value.mkString)
       .select(from_json($"value", schema).as("data"))
       .select($"data.*")
-
+      .select(
+      $"typeEvent"
+        , $"kindEvent"
+        , $"idClient"
+        , ($"dateCreate"/1000).cast("timestamp").as("dateCreate")
+        , $"approvedBy"
+        , ($"approvedDateTime"/1000).cast("timestamp").as("approvedDateTime")
+      )
 
     df.toJSON.writeStream
       .format("text")
+      .trigger(Trigger.ProcessingTime("35 seconds"))
       .outputMode(OutputMode.Append())
       .option("path", "events_to_analytics")
       .option("checkpointLocation", "chkp")
-      .trigger(Trigger.ProcessingTime("35 seconds"))
       .start()
       .awaitTermination()
 
