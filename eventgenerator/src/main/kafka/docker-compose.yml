@@ -76,10 +76,9 @@ services:
       "
 
 
-
   kafdrop:
     image: obsidiandynamics/kafdrop
-    container_name: kafdrop-otuskafka
+    container_name: kafdrop
     restart: "no"
     ports:
       - "9000:9000"
@@ -90,3 +89,22 @@ services:
       - kafka-1
       - kafka-2
       - kafka-3
+
+  database:
+    image: 'postgres:latest'
+    ports:
+      - "15432:5432"
+    env_file:
+      - .env
+    volumes:
+      - ./db-data/:/var/lib/postgresql/data/
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - "15433:80"
+    env_file:
+      - .env
+    depends_on:
+      - database
