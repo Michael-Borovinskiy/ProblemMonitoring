@@ -4,7 +4,7 @@ CREATE TABLE ANALYTICAL_EVENT(
   type_event varchar(20) ,
   kind_event varchar(50) ,
   id_client  varchar(10) ,
-  date_create timestamp ,
+  date_create timestamp without time zone ,
   approved_by varchar(20) ,
-  approved_datetime timestamp
+  approved_datetime timestamp without time zone
 );
