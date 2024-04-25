@@ -5,16 +5,8 @@ import org.apache.spark.sql.{Dataset, Row, SparkSession}
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types.{StringType, StructType}
 
-import scala.io.Source
-import scala.util.Using
 
-object analyticalstreams {
-
-  private val mapConf: Map[String, String] = Using(Source.fromResource("application.yml")) { src =>
-    src.getLines.flatMap(s => s.split(":")).grouped(2)
-      .map(x => (x.head.trim, x(1).trim))
-      .toMap
-  }.get
+object AnalyticalEventStream {
 
   def main(args: Array[String]): Unit = {
 
@@ -72,8 +64,8 @@ object analyticalstreams {
       .format("jdbc")
       .option("url", "jdbc:postgresql://0.0.0.0:15432/")
       .option("dbtable", "analytical_event")
-      .option("user", mapConf("POSTGRES_USER"))
-      .option("password", mapConf("POSTGRES_PASSWORD"))
+      .option("user", Utils.mapConf("POSTGRES_USER"))
+      .option("password", Utils.mapConf("POSTGRES_PASSWORD"))
       .option("driver", "org.postgresql.Driver")
       .mode("append")
       .save
