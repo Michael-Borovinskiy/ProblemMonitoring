@@ -16,7 +16,7 @@ import java.util.Date;
 public class GeneratorServiceImpl implements GeneratorService {
 
     @Value("${topicMonitoring}")
-    private String topicMonitoring;
+    private String topic;
     @Value("${topicAUTO}")
     private String topicAUTO;
 
@@ -33,7 +33,7 @@ public class GeneratorServiceImpl implements GeneratorService {
                     , RandomStringUtils.randomNumeric(2), new Date(), "None", new Date()));
         }
         else {
-            kafkaTemplate.send(topicMonitoring, new BusinessEvent(eventType, KindVerificatedType.randomType(),
+            kafkaTemplate.send(topic, new BusinessEvent(eventType, KindVerificatedType.randomType(),
                     RandomStringUtils.randomNumeric(2), new Date()));
         }
     }
