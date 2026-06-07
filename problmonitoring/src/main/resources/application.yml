@@ -1,6 +1,15 @@
 spring:
   application:
     name: problmonitoring
-
-topicMonitoring: monitoringserv
-topicAUTO: analyticalserv
+  config:
+    import: "vault://v1/secret/data"
+  cloud:
+    vault:
+      enabled: true
+      authentication: TOKEN
+      token: ${VAULT_TOKEN}
+      scheme: http
+      uri: http://0.0.0.0:8200/
+      kv:
+        backend: /secret/data
+        kv-version: 1

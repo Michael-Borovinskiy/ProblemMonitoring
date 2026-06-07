@@ -128,7 +128,7 @@ services:
     depends_on:
       - vault_srvc
     volumes:
-      - ./secrets.yaml:/secrets.yaml
+      - ./secret_load_dir:/secret_load_dir/
       - ./load-secrets.sh:/load-secrets.sh
     environment:
       - VAULT_ADDR=http://vault_srvc:8200

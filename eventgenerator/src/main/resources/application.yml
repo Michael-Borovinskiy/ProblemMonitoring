@@ -7,7 +7,7 @@ spring:
     vault:
       enabled: true
       authentication: TOKEN
-      token: myroot
+      token: ${VAULT_TOKEN}
       scheme: http
       uri: http://0.0.0.0:8200/
       kv:

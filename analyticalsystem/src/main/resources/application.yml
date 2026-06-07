@@ -1,11 +1,22 @@
 spring:
   application:
     name: analytical_system
-
+  config:
+    import: "vault://v1/secret/data"
+  cloud:
+    vault:
+      enabled: true
+      authentication: TOKEN
+      token: ${VAULT_TOKEN}
+      scheme: http
+      uri: http://0.0.0.0:8200/
+      kv:
+        backend: /secret/data
+        kv-version: 1
 
   datasource:
-    url: jdbc:h2:mem:analyticalevents
-    username: mike1
+    url: ${pgAnalyticalUrl}
+    username: ${techUserName}
     password:
     driverClassName: org.h2.Driver
   jpa:
@@ -13,6 +24,7 @@ spring:
 
   h2:
     console.enabled: true
+
 server:
   port: 8081
 
