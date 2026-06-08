@@ -1,9 +1,18 @@
 spring:
   application:
     name: eventgenerator
+  config:
+    import: "vault://v1/secret/data"
+  cloud:
+    vault:
+      enabled: true
+      authentication: TOKEN
+      token: ${VAULT_TOKEN}
+      scheme: http
+      uri: http://0.0.0.0:8200/
+      kv:
+        backend: /secret/data
+        kv-version: 1
 
 server:
   port: 8085
-
-topicMonitoring: monitoringserv
-topicAUTO: analyticalserv

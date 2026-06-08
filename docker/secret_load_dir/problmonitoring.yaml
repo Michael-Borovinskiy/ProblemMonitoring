@@ -1,0 +1,3 @@
+topicMonitoring: "monitoringserv"
+topicAUTO: "analyticalserv"
+bootstrapServerConfig: "localhost:9092,localhost:9093,localhost:9094"
