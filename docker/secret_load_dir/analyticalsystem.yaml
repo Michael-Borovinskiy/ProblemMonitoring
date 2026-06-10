@@ -1,4 +1,2 @@
-topicAUTO: "analyticalserv"
 techUserName: "mike1"
-bootstrapServerConfig: "localhost:9092,localhost:9093,localhost:9094"
-pgAnalyticalUrl: "jdbc:h2:mem:analyticalevents"
+

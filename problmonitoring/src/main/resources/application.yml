@@ -13,3 +13,8 @@ spring:
       kv:
         backend: /secret/data
         kv-version: 1
+
+# kafka
+topicMonitoring: "monitoringserv"
+topicAUTO: "analyticalserv"
+bootstrapServerConfig: "localhost:9092,localhost:9093,localhost:9094"
